@@ -1,6 +1,9 @@
-cacPlot <- function(x, stat = "cc", mdl = "Rasch", cutoff = 0, cSEM = TRUE, xRng = c(-3, 3), yRng = c(0, 1), grid = TRUE, lbls = TRUE, lgd = TRUE, grp = NULL, colorblindFriendly = FALSE) {
+cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "cc", mdl = "Rasch", cutoff = 0, cSEM = TRUE, xRng = c(-3, 3), yRng = c(0, 1), grid = TRUE, lbls = TRUE, lgd = TRUE, grp = NULL, colorblindFriendly = FALSE) {
   library(mirt)
   library(cacIRT)
+  if (!is.null(ablty) & is.null(ablty.se)) stop("Raw ability estimates must be accompanied by standard errors to compute classification accuracy or consistency.")
+  layout(matrix(c(1, 2), ncol = 2), c(5, 1), c(1, 1))
+  par(mar = c(4, 3, 3, 1))
   if (class(x) == "SingleGroupClass") {
     mod <- x
   } else {
@@ -63,6 +66,11 @@ cacPlot <- function(x, stat = "cc", mdl = "Rasch", cutoff = 0, cSEM = TRUE, xRng
     legend("topleft", bty = "n", lty = c(1, 2, 3), lwd = c(2, 2, 2), pch = c(19, NA_integer_, NA_integer_), legend = c("Obs. w/ 95% CI", "cSEM", paste("Cutoff (", cutoff, ")", sep = "")), merge = TRUE) 
   }
   if (lbls) {
-    title(main = paste("Expected Classification ", stat, " at Cutoff = ", cutoff, ".", sep = ""), xlab = expression(Theta))
+    title(main = paste("Expected Classification ", stat, " at Cutoff = ", cutoff, ".", sep = ""))
+    par(cex = 1.5)
+    title(xlab = expression(Theta))
   }
+  par(mar = c(4, 1, 3, 3), las = 1, cex = 1)
+  plot(NULL, xlim = c(0, 1), ylim = c(.5, 1), axes = FALSE, xlab = "", ylab = "")
+  axis(4, c(.5, .75, 1))
 }
