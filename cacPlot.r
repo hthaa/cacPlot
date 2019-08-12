@@ -1,8 +1,36 @@
-cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "cc", mdl = "Rasch", cutoff = 0, cSEM = TRUE, xRng = c(-3, 3), yRng = c(0, 1), grid = TRUE, lbls = TRUE, lgd = TRUE, grp = NULL, colorblindFriendly = FALSE) {
+cacGradient <- function(x, colorblindFriendly = FALSE) {
+  rgb(
+    red = if (x <= .75) {
+      1
+    } else {
+      (1 - x) * 4
+    },
+    green = if (!colorblindFriendly) {
+      if (x >= .75) {
+        1
+      } else {
+        (x - .5) * 4
+      }
+    } else {
+      0
+    },
+    blue = if (colorblindFriendly) {
+      if (x >= .75) {
+        1
+      } else {
+        (x - .5) * 4
+      }
+    } else {
+      0
+    }
+  )
+}
+
+cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "cc", mdl = "Rasch", cutoff = 0, cSEM = TRUE, xRng = c(-3, 3), yRng = c(0, 1), grid = TRUE, lbls = TRUE, lgd = TRUE, grp = NULL, rel.wdth = c(7, 1), colorblindFriendly = FALSE) {
   library(mirt)
   library(cacIRT)
   if (!is.null(ablty) & is.null(ablty.se)) stop("Raw ability estimates must be accompanied by standard errors to compute classification accuracy or consistency.")
-  layout(matrix(c(1, 2), ncol = 2), c(5, 1), c(1, 1))
+  layout(matrix(c(1, 2), ncol = 2), c(rel.wdth[1], rel.wdth[2]), c(1, 1))
   par(mar = c(4, 3, 3, 1))
   if (class(x) == "SingleGroupClass") {
     mod <- x
@@ -72,5 +100,6 @@ cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "cc", mdl = "Rasch"
   }
   par(mar = c(4, 1, 3, 3), las = 1, cex = 1)
   plot(NULL, xlim = c(0, 1), ylim = c(.5, 1), axes = FALSE, xlab = "", ylab = "")
+  abline(h = seq(.5, 1, .0001), col = sapply(seq(.5, 1, .0001), cacGradient))
   axis(4, c(.5, .75, 1))
 }
