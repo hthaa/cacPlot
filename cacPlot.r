@@ -3,13 +3,12 @@ cacPlot <- function(x, mdl = "Rasch", cutoff = 0, cSEM = TRUE, xRng = c(-3, 3), 
   library(cacIRT)
   if (class(x) == "SingleGroupClass") {
     mod <- x
-    ab.est <- fscores(mod, method = "ML", response.pattern = x@Data$data)[, c("F1", "SE_F1")]
   } else {
     if (class(x) == "data.frame" | class(x) == "matrix") {
       mod <- mirt(data = x, model = 1, itemtype = mdl)
-      ab.est <- fscores(mod, method = "ML", response.pattern = mod@Data$data)[, c("F1", "SE_F1")]
     }
   }
+  ab.est <- fscores(mod, method = "ML", response.pattern = mod@Data$data)[, c("F1", "SE_F1")]
   cac <- class.Rud(cutoff, ability = ab.est[, 1], se = ab.est[, 2], D = 1)
   cc.col <- rgb(
     red = if (cac$Conditional$Consistency[i] <= .75) {
