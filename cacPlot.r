@@ -1,4 +1,4 @@
-cacPlot <- function(x, stat = "cc", mdl = "Rasch", cutoff = 0, cSEM = TRUE, xRng = c(-3, 3), yRng = c(0, 1), grid = TRUE, lgd = TRUE, grp = NULL, colorblindFriendly = FALSE) {
+cacPlot <- function(x, stat = "cc", mdl = "Rasch", cutoff = 0, cSEM = TRUE, xRng = c(-3, 3), yRng = c(0, 1), grid = TRUE, lbls = TRUE, lgd = TRUE, grp = NULL, colorblindFriendly = FALSE) {
   library(mirt)
   library(cacIRT)
   if (class(x) == "SingleGroupClass") {
@@ -10,7 +10,7 @@ cacPlot <- function(x, stat = "cc", mdl = "Rasch", cutoff = 0, cSEM = TRUE, xRng
   }
   ab.est <- fscores(mod, method = "ML", response.pattern = mod@Data$data)[, c("F1", "SE_F1")]
   cac <- class.Rud(cutoff, ability = ab.est[, 1], se = ab.est[, 2], D = 1)
-  plot(NULL, xlim = c(xRng[1], xRng[2]), ylim = c(yRng[1], yRng[2]), xlab = expression(Theta), ylab = "Density")
+  plot(NULL, xlim = c(xRng[1], xRng[2]), ylim = c(yRng[1], yRng[2]), xlab = "", ylab = "")
   if (grid) grid()
   if (cSEM) {
     par(new = TRUE)
@@ -62,5 +62,7 @@ cacPlot <- function(x, stat = "cc", mdl = "Rasch", cutoff = 0, cSEM = TRUE, xRng
   if (lgd) {
     legend("topleft", bty = "n", lty = c(1, 2, 3), lwd = c(2, 2, 2), pch = c(19, NA_integer_, NA_integer_), legend = c("Obs. w/ 95% CI", "cSEM", paste("Cutoff (", cutoff, ")", sep = "")), merge = TRUE) 
   }
-  title(main = paste("Expected Classification ", stat, " at Cutoff = ", cutoff, ".", sep = ""))
+  if (lbls) {
+    title(main = paste("Expected Classification ", stat, " at Cutoff = ", cutoff, ".", sep = ""), xlab = expression(Theta))
+  }
 }
