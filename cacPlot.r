@@ -99,10 +99,10 @@ cacPlot <- function(x, mdl = "Rasch", cutoff = 0, cSEM = TRUE, xRng = c(-3, 3), 
     points(ab.est[i, 1], dnorm(ab.est[i, 1]), pch = 19, col = cc.col)
     # 95% CI.
     lines(c(ab.est[i, 1] - 1.96*ab.est[i, 2], ab.est[i, 1] + 1.96*ab.est[i, 2]), rep(dnorm(ab.est[i, 1]), 2), lwd = 2, col = cc.col)
-    lines(rep(ab.est[i, 1] - 1.96*ab.est[i, 2], 2), c(dnorm(ab.est[i, 1] - .025), dnorm(ab.est[i, 1] + .025)), lwd = 2, col = cc.col)
-    lines(rep(ab.est[i, 1] + 1.96*ab.est[i, 2], 2), c(dnorm(ab.est[i, 1] - .025), dnorm(ab.est[i, 1] + .025)), lwd = 2, col = cc.col)
+    lines(rep(ab.est[i, 1] - 1.96*ab.est[i, 2], 2), c(dnorm(ab.est[i, 1] - (yRng[2] - yRng[1]) * .03), dnorm(ab.est[i, 1] + (yRng[2] - yRng[1]) * .03)), lwd = 2, col = cc.col)
+    lines(rep(ab.est[i, 1] + 1.96*ab.est[i, 2], 2), c(dnorm(ab.est[i, 1] - (yRng[2] - yRng[1]) * .03), dnorm(ab.est[i, 1] + (yRng[2] - yRng[1]) * .03)), lwd = 2, col = cc.col)
   }
   if (lgd) {
-    legend("topleft", bty = "n", lty = c(1, 2, 3), lwd = c(2, 2, 2), pch = c(19, NA_integer_, NA_integer_), legend = c("Obs. w/ 95% CI", "cSEM", "Cutoff"), merge = TRUE) 
+    legend("topleft", bty = "n", lty = c(1, 2, 3), lwd = c(2, 2, 2), pch = c(19, NA_integer_, NA_integer_), legend = c("Obs. w/ 95% CI", "cSEM", paste("Cutoff (", cutoff, ")", sep = "")), merge = TRUE) 
   }
 }
