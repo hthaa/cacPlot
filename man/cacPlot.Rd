@@ -2,7 +2,7 @@
 % Please edit documentation in R/cacPlot.R
 \name{cacPlot}
 \alias{cacPlot}
-\title{Gradient-coded plotting of observations to reflect certainty of classification.}
+\title{Gradient-coded plotting of observations to reflect certainty of classifications for specific observations.}
 \usage{
 cacPlot(x, ablty = NULL, ablty.se = NULL, stat = "cc",
   mdl = "Rasch", cutoff = 0, ci = TRUE, cSEM = TRUE, xRng = c(-3,
@@ -12,13 +12,13 @@ cacPlot(x, ablty = NULL, ablty.se = NULL, stat = "cc",
 \arguments{
 \item{x}{A data.frame or matrix with rows representing respondents and columns representing items, or a mirt-model object of class "SingleGroupClass".}
 
-\item{ablty}{A vector of ability estimates. Required specification of standard error in "ablty.se" .}
+\item{ablty}{A vector of ability estimates. Required specification of standard error in \code{ablty.se}.}
 
-\item{ablty.se}{A vector of standard errors of estimates corresponding to the values in the "ablty" vector.}
+\item{ablty.se}{A vector of standard errors of estimates corresponding to the values in the \code{ablty} vector.}
 
 \item{stat}{A character-value indicating whether to color-code observations with respect to their expected consistency or accuracy. Permissible values are "c", "cc", "consistency" or "Consistency" for expected classification consistency, and "a", "ca", "accuracy" or "Accuracy" for expected classification accuracy.}
 
-\item{mdl}{If a dataset was supplied as input, specifies which model to fit to the data. See ?mirt for options.}
+\item{mdl}{If a dataset was supplied as input, specifies which model to fit to the data by way of the \code{mirt} package. See ?mirt for options.}
 
 \item{cutoff}{The cutoff value relative to which expected classification consistency or accuracy for observations are to be calculated and illustrated.}
 
@@ -28,7 +28,7 @@ cacPlot(x, ablty = NULL, ablty.se = NULL, stat = "cc",
 
 \item{xRng}{The range of the plotted x-axis.}
 
-\item{yRng}{The range of the ployyed y-axis.}
+\item{yRng}{The range of the plotted y-axis.}
 
 \item{grid}{Include a grid in the plot?}
 
@@ -42,5 +42,5 @@ cacPlot(x, ablty = NULL, ablty.se = NULL, stat = "cc",
 A graph plotting observations with color gradients indicating expected classification consistency and accuracy relative to a defined cutoff point.
 }
 \description{
-Gradient-coded plotting of observations to reflect certainty of classification.
+Gradient-coded plotting of observations to reflect certainty of classifications for specific observations.
 }
