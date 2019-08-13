@@ -1,11 +1,11 @@
-cacGradient <- function(x, colorblindFriendly = FALSE) {
+cacGradient <- function(x, cp = FALSE) {
   rgb(
     red = if (x <= .75) {
       1
     } else {
       (1 - x) * 4
     },
-    green = if (!colorblindFriendly) {
+    green = if (!cp) {
       if (x >= .75) {
         1
       } else {
@@ -14,7 +14,7 @@ cacGradient <- function(x, colorblindFriendly = FALSE) {
     } else {
       0
     },
-    blue = if (colorblindFriendly) {
+    blue = if (cp) {
       if (x >= .75) {
         1
       } else {
@@ -56,26 +56,17 @@ cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "cc", mdl = "Rasch"
   }
   abline(v = cutoff, lty = 3, lwd = 2)
   curve(dnorm(x), from = xRng[1], to = xRng[2], lwd = 2, n = 1001, add = TRUE)
-
-  cac.col <- sapply(cac$Conditional[[stat]], cacGradient)
-  # Point estimate of Theta.
+  cac.col <- sapply(cac$Conditional[[stat]], cacGradient, cp = colorblindFriendly)
   points(matrix(c(ab.est[, 1], sapply(ab.est[, 1], dnorm)), ncol = 2), pch = 19, col = cac.col)
-  
   if (ci) {
     coords <- matrix(c(ab.est[, 1] - 1.96*ab.est[, 2], ab.est[, 1] + 1.96*ab.est[, 2], sapply(ab.est[, 1], dnorm)), ncol = 3)
     apply(coords, 1, function(x) {
-      lines(x[-3], rep(x[3], 2), col = cacGradient(class.Rud(cutoff, ability = ((x[1] + x[2]) / 2), se = x[3])$Conditional[[stat]]), lwd = 2)
-      lines(rep(x[1], 2), c(x[3] - (yRng[2] - yRng[1]) * .015, x[3] + (yRng[2] - yRng[1]) * .015), col = cacGradient(class.Rud(cutoff, ability = ((x[1] + x[2]) / 2), se = x[3])$Conditional[[stat]]), lwd = 2)
-      lines(rep(x[2], 2), c(x[3] - (yRng[2] - yRng[1]) * .015, x[3] + (yRng[2] - yRng[1]) * .015), col = cacGradient(class.Rud(cutoff, ability = ((x[1] + x[2]) / 2), se = x[3])$Conditional[[stat]]), lwd = 2)
+      lines(x[-3], rep(x[3], 2), col = cacGradient(class.Rud(cutoff, ability = ((x[1] + x[2]) / 2), se = x[3])$Conditional[[stat]], colorblindFriendly), lwd = 2)
+      lines(rep(x[1], 2), c(x[3] - (yRng[2] - yRng[1]) * .015, x[3] + (yRng[2] - yRng[1]) * .015), col = cacGradient(class.Rud(cutoff, ability = ((x[1] + x[2]) / 2), se = x[3])$Conditional[[stat]], colorblindFriendly), lwd = 2)
+      lines(rep(x[2], 2), c(x[3] - (yRng[2] - yRng[1]) * .015, x[3] + (yRng[2] - yRng[1]) * .015), col = cacGradient(class.Rud(cutoff, ability = ((x[1] + x[2]) / 2), se = x[3])$Conditional[[stat]], colorblindFriendly), lwd = 2)
       }
     )
-  }
-  
-  #lines(matrix(c(ab.est[, 1] - 1.96*ab.est[, 2], ab.est[, 1] + 1.96*ab.est[, 2]), ncol = 2), rep(sapply(ab.est[, 1], dnorm), 2), lwd = 2, col = cac.col)
-  #lines(rep(ab.est[, 1] - 1.96*ab.est[, 2], 2), 
-  #      c(dnorm(ab.est[, 1] - (yRng[2] - yRng[1]) * .03), dnorm(ab.est[, 1] + (yRng[2] - yRng[1]) * .03)), lwd = 2, col = cac.col)
-  #lines(rep(ab.est[, 1] + 1.96*ab.est[, 2], 2), 
-  #      c(dnorm(ab.est[, 1] - (yRng[2] - yRng[1]) * .03), dnorm(ab.est[, 1] + (yRng[2] - yRng[1]) * .03)), lwd = 2, col = cac.col)
+  }  
   if (lgd) {
     legend("topleft", bty = "n", lty = c(1, 2, 3), lwd = c(2, 2, 2), pch = c(19, NA_integer_, NA_integer_), legend = c("Obs. w/ 95% CI", "cSEM", paste("Cutoff (", cutoff, ")", sep = "")), merge = TRUE) 
   }
@@ -86,6 +77,6 @@ cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "cc", mdl = "Rasch"
   }
   par(mar = c(4, 1, 3, 3), las = 1, cex = 1)
   plot(NULL, xlim = c(0, 1), ylim = c(.5, 1), axes = FALSE, xlab = "", ylab = "")
-  abline(h = seq(.5, 1, .0001), col = sapply(seq(.5, 1, .0001), cacGradient))
+  abline(h = seq(.5, 1, .0001), col = sapply(seq(.5, 1, .0001), cacGradient, cp = colorblindFriendly))
   axis(4, c(.5, .75, 1))
 }
