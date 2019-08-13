@@ -2,7 +2,7 @@ Package: cacPlot
 Type: Package
 Title: Classification Accuracy and Consistency Plotting (cacPlot)
 Version: 0.1.0
-Imports: mirt, cacIRT
+Depends: mirt >= (1.3), cacIRT >= (1.4)
 Author: Haakon Haakstad
 Maintainer: Haakon Haakstad <h.t.haakstad@cemo.uio.no>
 Description: More about what it does (maybe more than one line)
