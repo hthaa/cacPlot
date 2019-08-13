@@ -4,10 +4,10 @@
 \alias{cacPlot}
 \title{Plotting tool for gauging the classification accuracy or consistency of classifications based on IRT ability estimates.}
 \usage{
-cacPlot(x, ablty = NULL, ablty.se = NULL, stat = "cc",
-  mdl = "Rasch", cutoff = 0, ci = TRUE, cSEM = TRUE, xRng = c(-3,
-  3), yRng = c(0, 1), grid = TRUE, lbls = TRUE, lgd = TRUE,
-  rel.wdth = c(7, 1), colorblindFriendly = FALSE)
+cacPlot(x, ablty = NULL, ablty.se = NULL, stat = "ca",
+  mdl = "Rasch", cutoff = 0, ci = TRUE, cSEM = FALSE,
+  xRng = c(-3, 3), yRng = c(0, 1), grid = TRUE, lbls = TRUE,
+  lgd = TRUE, rel.wdth = c(7, 1), colorblindFriendly = FALSE)
 }
 \arguments{
 \item{x}{A data.frame or matrix with rows representing respondents and columns representing items, or a mirt-model object of class "SingleGroupClass".}
@@ -45,5 +45,6 @@ A graph plotting observations with color gradients indicating expected classific
 Plotting tool for gauging the classification accuracy or consistency of classifications based on IRT ability estimates.
 }
 \examples{
-data <- expand.table(LSAT7)
+data <- expand.table(LSAT7[2:31, ])
+cacPlot(data, stat = "c")
 }

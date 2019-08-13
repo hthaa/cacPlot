@@ -16,10 +16,11 @@
 #' @param colorblindFriendly Make gradient colorblind friendly?
 #' @return A graph plotting observations with color gradients indicating expected classification consistency and accuracy relative to a defined cutoff point.
 #' @examples
-#' data <- expand.table(LSAT7)
+#' data <- expand.table(LSAT7[2:31, ])
+#' cacPlot(data, stat = "c")
 #' @export
 
-cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "cc", mdl = "Rasch", cutoff = 0, ci = TRUE, cSEM = TRUE, xRng = c(-3, 3), yRng = c(0, 1), grid = TRUE, lbls = TRUE, lgd = TRUE, rel.wdth = c(7, 1), colorblindFriendly = FALSE) {
+cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "ca", mdl = "Rasch", cutoff = 0, ci = TRUE, cSEM = FALSE, xRng = c(-3, 3), yRng = c(0, 1), grid = TRUE, lbls = TRUE, lgd = TRUE, rel.wdth = c(7, 1), colorblindFriendly = FALSE) {
   if (!is.null(ablty) & is.null(ablty.se)) {
     stop("Raw ability estimates must be accompanied by standard errors to compute classification accuracy or consistency.")
   }
@@ -38,7 +39,7 @@ cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "cc", mdl = "Rasch"
       mod <- mirt::mirt(data = x, model = 1, itemtype = mdl)
     }
   }
-  ab.est <- mirt::fscores(mod, method = "EAP", response.pattern = mod@Data$data)[, c("F1", "SE_F1")]
+  ab.est <- mirt::fscores(mod, method = "ML", response.pattern = mod@Data$data)[, c("F1", "SE_F1")]
   cac <- cacIRT::class.Rud(cutoff, ability = ab.est[, 1], se = ab.est[, 2], D = 1)
   plot(NULL, xlim = c(xRng[1], xRng[2]), ylim = c(yRng[1], yRng[2]), xlab = "", ylab = "")
   if (grid) grid()
