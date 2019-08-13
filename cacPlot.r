@@ -29,7 +29,9 @@ cacGradient <- function(x, cp = FALSE) {
 cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "cc", mdl = "Rasch", cutoff = 0, ci = TRUE, cSEM = TRUE, xRng = c(-3, 3), yRng = c(0, 1), grid = TRUE, lbls = TRUE, lgd = TRUE, grp = NULL, rel.wdth = c(7, 1), colorblindFriendly = FALSE) {
   library(mirt)
   library(cacIRT)
-  if (!is.null(ablty) & is.null(ablty.se)) stop("Raw ability estimates must be accompanied by standard errors to compute classification accuracy or consistency.")
+  if (!is.null(ablty) & is.null(ablty.se)) {
+    stop("Raw ability estimates must be accompanied by standard errors to compute classification accuracy or consistency.")
+  } 
   if (stat == "cc" | stat == "c" | stat == "consistency") { 
     stat <- "Consistency" 
   }
@@ -61,14 +63,18 @@ cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "cc", mdl = "Rasch"
   if (ci) {
     coords <- matrix(c(ab.est[, 1] - 1.96*ab.est[, 2], ab.est[, 1] + 1.96*ab.est[, 2], sapply(ab.est[, 1], dnorm)), ncol = 3)
     apply(coords, 1, function(x) {
-      lines(x[-3], rep(x[3], 2), col = cacGradient(class.Rud(cutoff, ability = ((x[1] + x[2]) / 2), se = x[3])$Conditional[[stat]], colorblindFriendly), lwd = 2)
-      lines(rep(x[1], 2), c(x[3] - (yRng[2] - yRng[1]) * .015, x[3] + (yRng[2] - yRng[1]) * .015), col = cacGradient(class.Rud(cutoff, ability = ((x[1] + x[2]) / 2), se = x[3])$Conditional[[stat]], colorblindFriendly), lwd = 2)
-      lines(rep(x[2], 2), c(x[3] - (yRng[2] - yRng[1]) * .015, x[3] + (yRng[2] - yRng[1]) * .015), col = cacGradient(class.Rud(cutoff, ability = ((x[1] + x[2]) / 2), se = x[3])$Conditional[[stat]], colorblindFriendly), lwd = 2)
+      lines(x[-3], rep(x[3], 2), col = cacGradient(class.Rud(cutoff, ability = ((x[1] + x[2]) / 2), se = x[3])$Conditional[[stat]], 
+                                                   colorblindFriendly), lwd = 2)
+      lines(rep(x[1], 2), c(x[3] - (yRng[2] - yRng[1]) * .015, x[3] + (yRng[2] - yRng[1]) * .015), 
+            col = cacGradient(class.Rud(cutoff, ability = ((x[1] + x[2]) / 2), se = x[3])$Conditional[[stat]], colorblindFriendly), lwd = 2)
+      lines(rep(x[2], 2), c(x[3] - (yRng[2] - yRng[1]) * .015, x[3] + (yRng[2] - yRng[1]) * .015), 
+            col = cacGradient(class.Rud(cutoff, ability = ((x[1] + x[2]) / 2), se = x[3])$Conditional[[stat]], colorblindFriendly), lwd = 2)
       }
     )
   }  
   if (lgd) {
-    legend("topleft", bty = "n", lty = c(1, 2, 3), lwd = c(2, 2, 2), pch = c(19, NA_integer_, NA_integer_), legend = c("Obs. w/ 95% CI", "cSEM", paste("Cutoff (", cutoff, ")", sep = "")), merge = TRUE) 
+    legend("topleft", bty = "n", lty = c(1, 2, 3), lwd = c(2, 2, 2), pch = c(19, NA_integer_, NA_integer_), 
+           legend = c("Obs. w/ 95% CI", "cSEM", paste("Cutoff (", cutoff, ")", sep = "")), merge = TRUE) 
   }
   if (lbls) {
     title(main = paste("Expected Classification ", stat, " at Cutoff = ", cutoff, ".", sep = ""))
