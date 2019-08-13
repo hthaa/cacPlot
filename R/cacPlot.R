@@ -17,13 +17,13 @@ cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "cc", mdl = "Rasch"
       mod <- mirt::mirt(data = x, model = 1, itemtype = mdl)
     }
   }
-  ab.est <- fscores(mod, method = "ML", response.pattern = mod@Data$data)[, c("F1", "SE_F1")]
+  ab.est <- mirt::fscores(mod, method = "ML", response.pattern = mod@Data$data)[, c("F1", "SE_F1")]
   cac <- cacIRT::class.Rud(cutoff, ability = ab.est[, 1], se = ab.est[, 2], D = 1)
   plot(NULL, xlim = c(xRng[1], xRng[2]), ylim = c(yRng[1], yRng[2]), xlab = "", ylab = "")
   if (grid) grid()
   if (cSEM) {
     par(new = TRUE)
-    plot(seq(xRng[1], xRng[2], .001), 1 / sqrt(testinfo(mod, seq(xRng[1], xRng[2], .001))),
+    plot(seq(xRng[1], xRng[2], .001), 1 / sqrt(mirt::testinfo(mod, seq(xRng[1], xRng[2], .001))),
          xlim = c(xRng[1], xRng[2]), ylim = c(yRng[1], yRng[2]), type = "l", lty = 2, lwd = 2, xlab = "", ylab = "")
   }
   abline(v = cutoff, lty = 3, lwd = 2)
