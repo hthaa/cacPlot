@@ -1,4 +1,4 @@
-#' Gradient-coded plotting of observations to reflect certainty of classifications for specific observations.
+#' Plotting tool for gauging the classification accuracy or consistency of classifications based on IRT ability estimates.
 #'
 #' @param x A data.frame or matrix with rows representing respondents and columns representing items, or a mirt-model object of class "SingleGroupClass".
 #' @param ablty A vector of ability estimates. Required specification of standard error in \code{ablty.se}.
@@ -15,7 +15,8 @@
 #' @param rel.wdth The relative widths of the main plot and the color gradient legend.
 #' @param colorblindFriendly Make gradient colorblind friendly?
 #' @return A graph plotting observations with color gradients indicating expected classification consistency and accuracy relative to a defined cutoff point.
-#'
+#' @examples
+#' data <- expand.table(LSAT7)
 #' @export
 
 cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "cc", mdl = "Rasch", cutoff = 0, ci = TRUE, cSEM = TRUE, xRng = c(-3, 3), yRng = c(0, 1), grid = TRUE, lbls = TRUE, lgd = TRUE, rel.wdth = c(7, 1), colorblindFriendly = FALSE) {
@@ -37,7 +38,7 @@ cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "cc", mdl = "Rasch"
       mod <- mirt::mirt(data = x, model = 1, itemtype = mdl)
     }
   }
-  ab.est <- mirt::fscores(mod, method = "ML", response.pattern = mod@Data$data)[, c("F1", "SE_F1")]
+  ab.est <- mirt::fscores(mod, method = "EAP", response.pattern = mod@Data$data)[, c("F1", "SE_F1")]
   cac <- cacIRT::class.Rud(cutoff, ability = ab.est[, 1], se = ab.est[, 2], D = 1)
   plot(NULL, xlim = c(xRng[1], xRng[2]), ylim = c(yRng[1], yRng[2]), xlab = "", ylab = "")
   if (grid) grid()

@@ -2,7 +2,7 @@
 % Please edit documentation in R/cacPlot.R
 \name{cacPlot}
 \alias{cacPlot}
-\title{Gradient-coded plotting of observations to reflect certainty of classifications for specific observations.}
+\title{Plotting tool for gauging the classification accuracy or consistency of classifications based on IRT ability estimates.}
 \usage{
 cacPlot(x, ablty = NULL, ablty.se = NULL, stat = "cc",
   mdl = "Rasch", cutoff = 0, ci = TRUE, cSEM = TRUE, xRng = c(-3,
@@ -42,5 +42,8 @@ cacPlot(x, ablty = NULL, ablty.se = NULL, stat = "cc",
 A graph plotting observations with color gradients indicating expected classification consistency and accuracy relative to a defined cutoff point.
 }
 \description{
-Gradient-coded plotting of observations to reflect certainty of classifications for specific observations.
+Plotting tool for gauging the classification accuracy or consistency of classifications based on IRT ability estimates.
+}
+\examples{
+data <- expand.table(LSAT7)
 }
