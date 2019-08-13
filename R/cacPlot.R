@@ -14,11 +14,11 @@ cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "cc", mdl = "Rasch"
     mod <- x
   } else {
     if (class(x) == "data.frame" | class(x) == "matrix") {
-      mod <- mirt(data = x, model = 1, itemtype = mdl)
+      mod <- mirt::mirt(data = x, model = 1, itemtype = mdl)
     }
   }
   ab.est <- fscores(mod, method = "ML", response.pattern = mod@Data$data)[, c("F1", "SE_F1")]
-  cac <- class.Rud(cutoff, ability = ab.est[, 1], se = ab.est[, 2], D = 1)
+  cac <- cacIRT::class.Rud(cutoff, ability = ab.est[, 1], se = ab.est[, 2], D = 1)
   plot(NULL, xlim = c(xRng[1], xRng[2]), ylim = c(yRng[1], yRng[2]), xlab = "", ylab = "")
   if (grid) grid()
   if (cSEM) {
@@ -33,12 +33,12 @@ cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "cc", mdl = "Rasch"
   if (ci) {
     coords <- matrix(c(ab.est[, 1] - 1.96*ab.est[, 2], ab.est[, 1] + 1.96*ab.est[, 2], sapply(ab.est[, 1], dnorm)), ncol = 3)
     apply(coords, 1, function(x) {
-      lines(x[-3], rep(x[3], 2), col = cacGradient(class.Rud(cutoff, ability = ((x[1] + x[2]) / 2), se = x[3])$Conditional[[stat]],
+      lines(x[-3], rep(x[3], 2), col = cacGradient(cacIRT::class.Rud(cutoff, ability = ((x[1] + x[2]) / 2), se = x[3])$Conditional[[stat]],
                                                    colorblindFriendly), lwd = 2)
       lines(rep(x[1], 2), c(x[3] - (yRng[2] - yRng[1]) * .015, x[3] + (yRng[2] - yRng[1]) * .015),
-            col = cacGradient(class.Rud(cutoff, ability = ((x[1] + x[2]) / 2), se = x[3])$Conditional[[stat]], colorblindFriendly), lwd = 2)
+            col = cacGradient(cacIRT::class.Rud(cutoff, ability = ((x[1] + x[2]) / 2), se = x[3])$Conditional[[stat]], colorblindFriendly), lwd = 2)
       lines(rep(x[2], 2), c(x[3] - (yRng[2] - yRng[1]) * .015, x[3] + (yRng[2] - yRng[1]) * .015),
-            col = cacGradient(class.Rud(cutoff, ability = ((x[1] + x[2]) / 2), se = x[3])$Conditional[[stat]], colorblindFriendly), lwd = 2)
+            col = cacGradient(cacIRT::class.Rud(cutoff, ability = ((x[1] + x[2]) / 2), se = x[3])$Conditional[[stat]], colorblindFriendly), lwd = 2)
     }
     )
   }
