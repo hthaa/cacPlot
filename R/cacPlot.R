@@ -1,4 +1,22 @@
-cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "cc", mdl = "Rasch", cutoff = 0, ci = TRUE, cSEM = TRUE, xRng = c(-3, 3), yRng = c(0, 1), grid = TRUE, lbls = TRUE, lgd = TRUE, grp = NULL, rel.wdth = c(7, 1), colorblindFriendly = FALSE) {
+#' Gradient-coded plotting of observations to reflect certainty of classification.
+#'
+#' @param x A data.frame or matrix with rows representing respondents and columns representing items, or a mirt-model object of class "SingleGroupClass".
+#' @param ablty A vector of ability estimates. Required specification of standard error in "ablty.se" .
+#' @param ablty.se A vector of standard errors of estimates corresponding to the values in the "ablty" vector.
+#' @param stat A character-value indicating whether to color-code observations with respect to their expected consistency or accuracy. Permissible values are "c", "cc", "consistency" or "Consistency" for expected classification consistency, and "a", "ca", "accuracy" or "Accuracy" for expected classification accuracy.
+#' @param mdl If a dataset was supplied as input, specifies which model to fit to the data. See ?mirt for options.
+#' @param cutoff The cutoff value relative to which expected classification consistency or accuracy for observations are to be calculated and illustrated.
+#' @param ci Plot confidence intervals around each observation point?
+#' @param cSEM Plot the conditional standard errors of the estimates?
+#' @param xRng The range of the plotted x-axis.
+#' @param yRng The range of the ployyed y-axis.
+#' @param grid Include a grid in the plot?
+#' @param lbls Include labels in the plot?
+#' @param rel.wdth The relative widths of the main plot and the color gradient legend.
+#' @param colorblindFriendly Make gradient colorblind friendly?
+#' @return A graph plotting observations with color gradients indicating expected classification consistency and accuracy relative to a defined cutoff point.
+
+cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "cc", mdl = "Rasch", cutoff = 0, ci = TRUE, cSEM = TRUE, xRng = c(-3, 3), yRng = c(0, 1), grid = TRUE, lbls = TRUE, lgd = TRUE, rel.wdth = c(7, 1), colorblindFriendly = FALSE) {
   if (!is.null(ablty) & is.null(ablty.se)) {
     stop("Raw ability estimates must be accompanied by standard errors to compute classification accuracy or consistency.")
   }
