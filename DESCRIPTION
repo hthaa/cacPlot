@@ -5,8 +5,11 @@ Version: 0.1.0
 Imports: mirt, cacIRT
 Author: Haakon Thorbergsen Haakstad
 Maintainer: Haakon Thorbergsen Haakstad <h.t.haakstad@cemo.uio.no>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Plotting tool for quickly generating informative graphs
+    plotting individual IRT ability-estimates along the normal latent
+    population distribution, color-coded so as to give an indication
+    about the level of certainty about classifications made based
+    on the observation and its associated standard error.
 License: CC0
 Encoding: UTF-8
 LazyData: true
