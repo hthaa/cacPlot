@@ -2,7 +2,7 @@
 % Please edit documentation in R/cacPlot.R
 \name{cacPlot}
 \alias{cacPlot}
-\title{Plotting tool for gauging the classification accuracy or consistency of classifications based on IRT ability estimates.}
+\title{Plotting tool for gauging the classification accuracy or consistency of classifications based on IRT ability estimates, where classification accuracy and consistency indices are computed by means of the \code{cacIRT} package (Lathrop, 2015).}
 \usage{
 cacPlot(x, ablty = NULL, ablty.se = NULL, stat = "ca",
   mdl = "Rasch", cutoff = 0, ci = TRUE, cSEM = FALSE,
@@ -18,7 +18,7 @@ cacPlot(x, ablty = NULL, ablty.se = NULL, stat = "ca",
 
 \item{stat}{A character-value indicating whether to color-code observations with respect to their expected consistency or accuracy. Permissible values are "c", "cc", "consistency" or "Consistency" for expected classification consistency, and "a", "ca", "accuracy" or "Accuracy" for expected classification accuracy.}
 
-\item{mdl}{If a dataset was supplied as input, specifies which model to fit to the data by way of the \code{mirt} package. See ?mirt for options.}
+\item{mdl}{If a dataset was supplied as input, specifies which model to fit to the data by way of the \code{mirt} package (Chalmers, 2012). See ?mirt for options.}
 
 \item{cutoff}{The cutoff value relative to which expected classification consistency or accuracy for observations are to be calculated and illustrated.}
 
@@ -42,7 +42,7 @@ cacPlot(x, ablty = NULL, ablty.se = NULL, stat = "ca",
 A graph plotting observations with color gradients indicating expected classification consistency and accuracy relative to a defined cutoff point.
 }
 \description{
-Plotting tool for gauging the classification accuracy or consistency of classifications based on IRT ability estimates.
+Plotting tool for gauging the classification accuracy or consistency of classifications based on IRT ability estimates, where classification accuracy and consistency indices are computed by means of the \code{cacIRT} package (Lathrop, 2015).
 }
 \examples{
 data <- expand.table(LSAT7[2:31, ])
