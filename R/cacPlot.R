@@ -15,8 +15,8 @@
 #' @param rel.wdth The relative widths of the main plot and the color gradient legend.
 #' @param colorblindFriendly Make gradient colorblind friendly?
 #' @return A graph plotting observations with color gradients indicating expected classification consistency and accuracy relative to a defined cutoff point.
-#' @references R. Philip Chalmers (2012). mirt: A Multidimensional Item Response Theory Package for the R Environment. Journal of Statistical Software, 48(6), 1-29. doi:10.18637/jss.v048.i06
-#' @references Quinn N. Lathrop (2015). cacIRT: Classification Accuracy and Consistency under Item Response Theory. R package version 1.4. https://CRAN.R-project.org/package=cacIRT
+#' @references R. Philip Chalmers (2012). mirt: A Multidimensional Item Response Theory Package for the R Environment. Journal of Statistical Software, 48(6), 1-29.
+#' @references Quinn N. Lathrop (2015). cacIRT: Classification Accuracy and Consistency under Item Response Theory. R package version 1.4.
 #' @examples
 #' data <- expand.table(LSAT7[2:31, ])
 #' cacPlot(data, stat = "c")
