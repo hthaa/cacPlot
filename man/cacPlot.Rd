@@ -48,3 +48,8 @@ Plotting tool for gauging the classification accuracy or consistency of classifi
 data <- expand.table(LSAT7[2:31, ])
 cacPlot(data, stat = "c")
 }
+\references{
+R. Philip Chalmers (2012). mirt: A Multidimensional Item Response Theory Package for the R Environment. Journal of Statistical Software, 48(6), 1-29. doi:10.18637/jss.v048.i06
+
+Quinn N. Lathrop (2015). cacIRT: Classification Accuracy and Consistency under Item Response Theory. R package version 1.4. https://CRAN.R-project.org/package=cacIRT
+}
