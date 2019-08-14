@@ -1,4 +1,6 @@
-#' Plotting tool for gauging the classification accuracy or consistency of classifications based on IRT ability estimates, where classification accuracy and consistency indices are computed by means of the \code{cacIRT} package (Lathrop, 2015).
+#' Classification Accuracy and Consistency Plotting.
+#'
+#' @description Plotting tool for gauging the classification accuracy or consistency of classifications based on IRT ability estimates, where classification accuracy and consistency indices are computed by means of the \code{cacIRT} package (Lathrop, 2015).
 #'
 #' @param x A data.frame or matrix with rows representing respondents and columns representing items, or a mirt-model object of class "SingleGroupClass".
 #' @param ablty A vector of ability estimates. Required specification of standard error in \code{ablty.se}.

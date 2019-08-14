@@ -2,7 +2,7 @@
 % Please edit documentation in R/cacPlot.R
 \name{cacPlot}
 \alias{cacPlot}
-\title{Plotting tool for gauging the classification accuracy or consistency of classifications based on IRT ability estimates, where classification accuracy and consistency indices are computed by means of the \code{cacIRT} package (Lathrop, 2015).}
+\title{Classification Accuracy and Consistency Plotting.}
 \usage{
 cacPlot(x, ablty = NULL, ablty.se = NULL, stat = "ca",
   mdl = "Rasch", cutoff = 0, ci = TRUE, cSEM = FALSE,
