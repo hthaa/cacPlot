@@ -46,9 +46,9 @@ Plotting tool for gauging the classification accuracy or consistency of classifi
 }
 \examples{
 # Color-blind friendly plotting of classification consistency based on feeding
-# cacPlot a dataset.
+# cacPlot a dataset, where the cutoff-point is set to 0.5.
 data <- expand.table(LSAT7[2:31, ])
-cacPlot(data, stat = "c", colorblindFriendly = TRUE)
+cacPlot(data, stat = "c", cutoff = .5, colorblindFriendly = TRUE)
 
 # Plotting of classification accuracy based on feeding cacPlot a mirt
 # model-object, along with plotting of the conditional standard error
