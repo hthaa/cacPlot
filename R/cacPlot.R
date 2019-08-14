@@ -66,14 +66,14 @@ cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "ca", mdl = "Rasch"
   cac.col <- sapply(cac$Conditional[[stat]], cacGradient, cp = colorblindFriendly)
   points(matrix(c(ab.est[, 1], sapply(ab.est[, 1], dnorm)), ncol = 2), pch = 19, col = cac.col)
   if (ci) {
-    coords <- matrix(c(ab.est[, 1] - 1.96*ab.est[, 2], ab.est[, 1] + 1.96*ab.est[, 2], sapply(ab.est[, 1], dnorm)), ncol = 3)
+    coords <- matrix(c(ab.est[, 1], ab.est[, 2], ab.est[, 1] - 1.96*ab.est[, 2], ab.est[, 1] + 1.96*ab.est[, 2], sapply(ab.est[, 1], dnorm)), ncol = 5)
     apply(coords, 1, function(x) {
-      lines(x[-3], rep(x[3], 2), col = cacGradient(cacIRT::class.Rud(cutoff, ability = ((x[1] + x[2]) / 2), se = x[3])$Conditional[[stat]],
-                                                   colorblindFriendly), lwd = 2)
-      lines(rep(x[1], 2), c(x[3] - (yRng[2] - yRng[1]) * .015, x[3] + (yRng[2] - yRng[1]) * .015),
-            col = cacGradient(cacIRT::class.Rud(cutoff, ability = ((x[1] + x[2]) / 2), se = x[3])$Conditional[[stat]], colorblindFriendly), lwd = 2)
-      lines(rep(x[2], 2), c(x[3] - (yRng[2] - yRng[1]) * .015, x[3] + (yRng[2] - yRng[1]) * .015),
-            col = cacGradient(cacIRT::class.Rud(cutoff, ability = ((x[1] + x[2]) / 2), se = x[3])$Conditional[[stat]], colorblindFriendly), lwd = 2)
+      lines(x[c(3, 4)], rep(x[5], 2), col = cacGradient(cacIRT::class.Rud(cutoff, D = 1, ability = x[1], se = x[2])$Conditional[[stat]],
+                                                        colorblindFriendly), lwd = 2)
+      lines(rep(x[3], 2), c(x[5] - (yRng[2] - yRng[1]) * .015, x[5] + (yRng[2] - yRng[1]) * .015),
+            col = cacGradient(cacIRT::class.Rud(cutoff, D = 1, ability = x[1], se = x[2])$Conditional[[stat]], colorblindFriendly), lwd = 2)
+      lines(rep(x[4], 2), c(x[5] - (yRng[2] - yRng[1]) * .015, x[5] + (yRng[2] - yRng[1]) * .015),
+            col = cacGradient(cacIRT::class.Rud(cutoff, D = 1, ability = x[1], se = x[2])$Conditional[[stat]], colorblindFriendly), lwd = 2)
     }
     )
   }
