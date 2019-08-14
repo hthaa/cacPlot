@@ -45,8 +45,17 @@ A graph plotting observations with color gradients indicating expected classific
 Plotting tool for gauging the classification accuracy or consistency of classifications based on IRT ability estimates, where classification accuracy and consistency indices are computed by means of the \code{cacIRT} package (Lathrop, 2015).
 }
 \examples{
+# Color-blind friendly plotting of classification consistency based on feeding
+# cacPlot a dataset.
 data <- expand.table(LSAT7[2:31, ])
-cacPlot(data, stat = "c")
+cacPlot(data, stat = "c", colorblindFriendly = TRUE)
+
+# Plotting of classification accuracy based on feeding cacPlot a mirt
+# model-object, along with plotting of the conditional standard error
+# of measurement (cSEM).
+data <- expand.table(LSAT7[2:31, ])
+LSAT7.mod <- mirt(data, model = 1, itemtype = "Rasch")
+cacPlot(LSAT7.mod, stat = "a", cSEM = TRUE)
 }
 \references{
 R. Philip Chalmers (2012). mirt: A Multidimensional Item Response Theory Package for the R Environment. Journal of Statistical Software, 48(6), 1-29.
