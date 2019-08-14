@@ -4,7 +4,7 @@
 #' @param ablty A vector of ability estimates. Required specification of standard error in \code{ablty.se}.
 #' @param ablty.se A vector of standard errors of estimates corresponding to the values in the \code{ablty} vector.
 #' @param stat A character-value indicating whether to color-code observations with respect to their expected consistency or accuracy. Permissible values are "c", "cc", "consistency" or "Consistency" for expected classification consistency, and "a", "ca", "accuracy" or "Accuracy" for expected classification accuracy.
-#' @param mdl If a dataset was supplied as input, specifies which model to fit to the data by way of the \code{mirt} package (Chalmers, 2012). See ?mirt for options.
+#' @param mdl If a dataset was supplied as input, specifies which model to fit to the data by way of the \code{mirt} package (Chalmers, 2012). See \code{?mirt} for options.
 #' @param cutoff The cutoff value relative to which expected classification consistency or accuracy for observations are to be calculated and illustrated.
 #' @param ci Plot confidence intervals around each observation point?
 #' @param cSEM Plot the conditional standard errors of the estimates?
