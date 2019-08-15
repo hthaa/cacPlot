@@ -4,10 +4,11 @@
 \alias{cacPlot}
 \title{Classification Accuracy and Consistency Plotting.}
 \usage{
-cacPlot(x = NULL, ablty = NULL, ablty.se = NULL, stat = "ca",
-  mdl = "Rasch", cutoff = 0, ci = TRUE, cSEM = FALSE,
-  xRng = c(-3, 3), yRng = c(0, 1), grid = TRUE, lbls = TRUE,
-  lgd = TRUE, rel.wdth = c(7, 1), colorblindFriendly = FALSE)
+cacPlot(x = NULL, ablty = NULL, ablty.se = NULL, cutoff = 0,
+  stat = "ca", ci = TRUE, cSEM = FALSE, xRng = c(-3, 3),
+  yRng = c(0, 1), grid = TRUE, lbls = TRUE, lgd = TRUE,
+  rel.wdth = c(7, 1), mdl = "Rasch", ablty.est = "ML",
+  colorblindFriendly = FALSE)
 }
 \arguments{
 \item{x}{A data.frame or matrix with rows representing respondents and columns representing items, or a mirt-model object of class "SingleGroupClass".}
@@ -16,11 +17,9 @@ cacPlot(x = NULL, ablty = NULL, ablty.se = NULL, stat = "ca",
 
 \item{ablty.se}{A vector of standard errors of estimates corresponding to the values in the \code{ablty} vector.}
 
-\item{stat}{A character-value indicating whether to color-code observations with respect to their expected consistency or accuracy. Permissible values are "c", "cc", "consistency" or "Consistency" for expected classification consistency, and "a", "ca", "accuracy" or "Accuracy" for expected classification accuracy.}
-
-\item{mdl}{If a dataset was supplied as input, specifies which model to fit to the data by way of the \code{mirt} package (Chalmers, 2012). See \code{?mirt} for options.}
-
 \item{cutoff}{The cutoff value relative to which expected classification consistency or accuracy for observations are to be calculated and illustrated.}
+
+\item{stat}{A character-value indicating whether to color-code observations with respect to their expected consistency or accuracy. Permissible values are "c", "cc", "consistency" or "Consistency" for expected classification consistency, and "a", "ca", "accuracy" or "Accuracy" for expected classification accuracy.}
 
 \item{ci}{Plot confidence intervals around each observation point?}
 
@@ -35,6 +34,10 @@ cacPlot(x = NULL, ablty = NULL, ablty.se = NULL, stat = "ca",
 \item{lbls}{Include labels in the plot?}
 
 \item{rel.wdth}{The relative widths of the main plot and the color gradient legend.}
+
+\item{mdl}{If a dataset was supplied as input, specifies which model to fit to the data by way of the \code{mirt} package (Chalmers, 2012). See \code{?mirt} for options.}
+
+\item{ablty.est}{Which estimator to use for estimating ability from data. Default is maximum likelihood ("ML"). See \code{?mirt} for options.}
 
 \item{colorblindFriendly}{Make gradient colorblind friendly?}
 }

@@ -5,9 +5,8 @@
 #' @param x A data.frame or matrix with rows representing respondents and columns representing items, or a mirt-model object of class "SingleGroupClass".
 #' @param ablty A vector of ability estimates. Required specification of standard error in \code{ablty.se}.
 #' @param ablty.se A vector of standard errors of estimates corresponding to the values in the \code{ablty} vector.
-#' @param stat A character-value indicating whether to color-code observations with respect to their expected consistency or accuracy. Permissible values are "c", "cc", "consistency" or "Consistency" for expected classification consistency, and "a", "ca", "accuracy" or "Accuracy" for expected classification accuracy.
-#' @param mdl If a dataset was supplied as input, specifies which model to fit to the data by way of the \code{mirt} package (Chalmers, 2012). See \code{?mirt} for options.
 #' @param cutoff The cutoff value relative to which expected classification consistency or accuracy for observations are to be calculated and illustrated.
+#' @param stat A character-value indicating whether to color-code observations with respect to their expected consistency or accuracy. Permissible values are "c", "cc", "consistency" or "Consistency" for expected classification consistency, and "a", "ca", "accuracy" or "Accuracy" for expected classification accuracy.
 #' @param ci Plot confidence intervals around each observation point?
 #' @param cSEM Plot the conditional standard errors of the estimates?
 #' @param xRng The range of the plotted x-axis.
@@ -15,6 +14,8 @@
 #' @param grid Include a grid in the plot?
 #' @param lbls Include labels in the plot?
 #' @param rel.wdth The relative widths of the main plot and the color gradient legend.
+#' @param mdl If a dataset was supplied as input, specifies which model to fit to the data by way of the \code{mirt} package (Chalmers, 2012). See \code{?mirt} for options.
+#' @param ablty.est Which estimator to use for estimating ability from data. Default is maximum likelihood ("ML"). See \code{?mirt} for options.
 #' @param colorblindFriendly Make gradient colorblind friendly?
 #' @return A graph plotting observations with color gradients indicating expected classification consistency and accuracy relative to a defined cutoff point.
 #' @references R. Philip Chalmers (2012). mirt: A Multidimensional Item Response Theory Package for the R Environment. Journal of Statistical Software, 48(6), 1-29.
@@ -41,7 +42,7 @@
 #' cacPlot(ablty = ability_estimates[, "F1"], ablty.se = ability_estimates[, "SE_F1"])
 #' @export
 
-cacPlot <- function(x = NULL, ablty = NULL, ablty.se = NULL, stat = "ca", mdl = "Rasch", cutoff = 0, ci = TRUE, cSEM = FALSE, xRng = c(-3, 3), yRng = c(0, 1), grid = TRUE, lbls = TRUE, lgd = TRUE, rel.wdth = c(7, 1), colorblindFriendly = FALSE) {
+cacPlot <- function(x = NULL, ablty = NULL, ablty.se = NULL, cutoff = 0, stat = "ca", ci = TRUE, cSEM = FALSE, xRng = c(-3, 3), yRng = c(0, 1), grid = TRUE, lbls = TRUE, lgd = TRUE, rel.wdth = c(7, 1), mdl = "Rasch", ablty.est = "ML", colorblindFriendly = FALSE) {
   if (!is.null(ablty) & is.null(ablty.se)) {
     stop("Raw ability estimates must be accompanied by standard errors to compute classification accuracy or consistency.")
   }
