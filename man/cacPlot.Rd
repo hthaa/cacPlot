@@ -13,9 +13,9 @@ cacPlot(x = NULL, ablty = NULL, ablty.se = NULL, cutoff = 0,
 \arguments{
 \item{x}{A data.frame or matrix with rows representing respondents and columns representing items, or a mirt-model object of class "SingleGroupClass".}
 
-\item{ablty}{A vector of ability estimates. Required specification of standard error in \code{ablty.se}.}
+\item{ablty}{A vector of ability estimates. Requires specification of standard error in \code{ablty.se}.}
 
-\item{ablty.se}{A vector of standard errors of estimates corresponding to the values in the \code{ablty} vector.}
+\item{ablty.se}{A vector of standard errors of estimates corresponding to the values in the \code{ablty} vector. Must be supplied if raw ability estimates are to be used for plotting.}
 
 \item{cutoff}{The cutoff value relative to which expected classification consistency or accuracy for observations are to be calculated and illustrated.}
 
