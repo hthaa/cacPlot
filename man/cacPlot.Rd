@@ -6,7 +6,7 @@
 \usage{
 cacPlot(x = NULL, ablty = NULL, ablty.se = NULL, cutoff = 0,
   stat = "ca", ci = TRUE, cSEM = FALSE, xRng = c(-3, 3),
-  yRng = c(0, 1), grid = TRUE, lbls = TRUE, lgd = TRUE,
+  yRng = c(0, 0.5), grid = TRUE, lbls = TRUE, lgd = TRUE,
   rel.wdth = c(7, 1), mdl = "Rasch", ablty.est = "ML",
   colorblindFriendly = FALSE)
 }

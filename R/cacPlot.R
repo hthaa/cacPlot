@@ -42,7 +42,7 @@
 #' cacPlot(ablty = ability_estimates[, "F1"], ablty.se = ability_estimates[, "SE_F1"], stat = "c")
 #' @export
 
-cacPlot <- function(x = NULL, ablty = NULL, ablty.se = NULL, cutoff = 0, stat = "ca", ci = TRUE, cSEM = FALSE, xRng = c(-3, 3), yRng = c(0, 1), grid = TRUE, lbls = TRUE, lgd = TRUE, rel.wdth = c(7, 1), mdl = "Rasch", ablty.est = "ML", colorblindFriendly = FALSE) {
+cacPlot <- function(x = NULL, ablty = NULL, ablty.se = NULL, cutoff = 0, stat = "ca", ci = TRUE, cSEM = FALSE, xRng = c(-3, 3), yRng = c(0, .5), grid = TRUE, lbls = TRUE, lgd = TRUE, rel.wdth = c(7, 1), mdl = "Rasch", ablty.est = "ML", colorblindFriendly = FALSE) {
   if (!is.null(ablty) & is.null(ablty.se)) {
     stop("Raw ability estimates must be accompanied by standard errors to compute classification accuracy or consistency.")
   }
