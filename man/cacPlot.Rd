@@ -37,7 +37,7 @@ cacPlot(x = NULL, ablty = NULL, ablty.se = NULL, cutoff = 0,
 
 \item{mdl}{If a dataset was supplied as input, specifies which model to fit to the data by way of the \code{mirt} package (Chalmers, 2012). See \code{?mirt} for options.}
 
-\item{ablty.est}{Which estimator to use for estimating ability from data. Default is maximum likelihood ("ML"). See \code{?mirt} for options.}
+\item{ablty.est}{A character value specifying which estimator to use for estimating ability from data. Default is maximum likelihood ("ML"). See \code{?mirt} for options.}
 
 \item{colorblindFriendly}{Make gradient colorblind friendly?}
 }

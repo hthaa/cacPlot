@@ -15,7 +15,7 @@
 #' @param lbls Include labels in the plot?
 #' @param rel.wdth The relative widths of the main plot and the color gradient legend.
 #' @param mdl If a dataset was supplied as input, specifies which model to fit to the data by way of the \code{mirt} package (Chalmers, 2012). See \code{?mirt} for options.
-#' @param ablty.est Which estimator to use for estimating ability from data. Default is maximum likelihood ("ML"). See \code{?mirt} for options.
+#' @param ablty.est A character value specifying which estimator to use for estimating ability from data. Default is maximum likelihood ("ML"). See \code{?mirt} for options.
 #' @param colorblindFriendly Make gradient colorblind friendly?
 #' @return A graph plotting observations with color gradients indicating expected classification consistency and accuracy relative to a defined cutoff point.
 #' @references R. Philip Chalmers (2012). mirt: A Multidimensional Item Response Theory Package for the R Environment. Journal of Statistical Software, 48(6), 1-29.
@@ -67,7 +67,7 @@ cacPlot <- function(x = NULL, ablty = NULL, ablty.se = NULL, cutoff = 0, stat = 
     }
   }
   ab.est <- if (!is.null(x))  {
-    mirt::fscores(mod, method = "ML", response.pattern = mod@Data$data)[, c("F1", "SE_F1")]
+    mirt::fscores(mod, method = ablty.est, response.pattern = mod@Data$data)[, c("F1", "SE_F1")]
   } else {
     matrix(c(ablty, ablty.se), ncol = 2)
   }
