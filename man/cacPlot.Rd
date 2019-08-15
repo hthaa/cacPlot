@@ -51,8 +51,9 @@ data <- expand.table(LSAT7[2:31, ])
 cacPlot(data, stat = "c", cutoff = .5, colorblindFriendly = TRUE)
 
 # Plotting of classification accuracy based on feeding cacPlot a mirt
-# model-object, along with plotting of the conditional standard error
-# of measurement (cSEM).
+# model-object along with plotting of the conditional standard error
+# of measurement (cSEM), using the default cutoff of 0 (i.e., above
+# or below average.
 data <- expand.table(LSAT7[2:31, ])
 LSAT7.mod <- mirt(data, model = 1, itemtype = "Rasch")
 cacPlot(LSAT7.mod, stat = "a", cSEM = TRUE)
