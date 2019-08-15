@@ -31,9 +31,16 @@
 #' data <- expand.table(LSAT7[2:31, ])
 #' LSAT7.mod <- mirt(data, model = 1, itemtype = "Rasch")
 #' cacPlot(LSAT7.mod, stat = "a", cSEM = TRUE)
+#'
+#' # Plotting of classification consistency based on feeding cacPlot a
+#' # vector of raw ability estimates, and a vector with the standard
+#' # errors corresponding to those ability estimates.
+#' ability_estimates <- fscores(mirt(expand.table(LSAT7[2:31, ]), 1, "Rasch"),
+#'     "ML", response.pattern = expand.table(LSAT7[2:31, ]))[, c("F1", "SE_F1")]
+#' cacPlot(ablty = ability_estimates[, "F1"], ablty.se = ability_estimates[, "SE_F1"])
 #' @export
 
-cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "ca", mdl = "Rasch", cutoff = 0, ci = TRUE, cSEM = FALSE, xRng = c(-3, 3), yRng = c(0, 1), grid = TRUE, lbls = TRUE, lgd = TRUE, rel.wdth = c(7, 1), colorblindFriendly = FALSE) {
+cacPlot <- function(x = NULL, ablty = NULL, ablty.se = NULL, stat = "ca", mdl = "Rasch", cutoff = 0, ci = TRUE, cSEM = FALSE, xRng = c(-3, 3), yRng = c(0, 1), grid = TRUE, lbls = TRUE, lgd = TRUE, rel.wdth = c(7, 1), colorblindFriendly = FALSE) {
   if (!is.null(ablty) & is.null(ablty.se)) {
     stop("Raw ability estimates must be accompanied by standard errors to compute classification accuracy or consistency.")
   }
@@ -43,7 +50,12 @@ cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "ca", mdl = "Rasch"
   if (stat == "ca" | stat == "a" | stat == "accuracy") {
     stat <- "Accuracy"
   }
-  layout(matrix(c(1, 2), ncol = 2), c(rel.wdth[1], rel.wdth[2]), c(1, 1))
+  layout(matrix(c(2, 1), ncol = 2), c(rel.wdth[1], rel.wdth[2]), c(1, 1))
+
+  par(mar = c(4, 1, 3, 3), las = 1, cex = 1)
+  plot(NULL, xlim = c(0, 1), ylim = c(.5, 1), axes = FALSE, xlab = "", ylab = "")
+  abline(h = seq(.5, 1, .0001), col = sapply(seq(.5, 1, .0001), cacGradient, cp = colorblindFriendly))
+  axis(4, c(.5, .75, 1))
   par(mar = c(4, 3, 3, 1))
   if (class(x) == "SingleGroupClass") {
     mod <- x
@@ -52,7 +64,11 @@ cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "ca", mdl = "Rasch"
       mod <- mirt::mirt(data = x, model = 1, itemtype = mdl)
     }
   }
-  ab.est <- mirt::fscores(mod, method = "ML", response.pattern = mod@Data$data)[, c("F1", "SE_F1")]
+  ab.est <- if (!is.null(x))  {
+    mirt::fscores(mod, method = "ML", response.pattern = mod@Data$data)[, c("F1", "SE_F1")]
+  } else {
+    matrix(c(ablty, ablty.se), ncol = 2)
+  }
   cac <- cacIRT::class.Rud(cutoff, ability = ab.est[, 1], se = ab.est[, 2], D = 1)
   plot(NULL, xlim = c(xRng[1], xRng[2]), ylim = c(yRng[1], yRng[2]), xlab = "", ylab = "")
   if (grid) grid()
@@ -86,8 +102,4 @@ cacPlot <- function(x, ablty = NULL, ablty.se = NULL, stat = "ca", mdl = "Rasch"
     par(cex = 1.5)
     title(xlab = expression(Theta))
   }
-  par(mar = c(4, 1, 3, 3), las = 1, cex = 1)
-  plot(NULL, xlim = c(0, 1), ylim = c(.5, 1), axes = FALSE, xlab = "", ylab = "")
-  abline(h = seq(.5, 1, .0001), col = sapply(seq(.5, 1, .0001), cacGradient, cp = colorblindFriendly))
-  axis(4, c(.5, .75, 1))
 }

@@ -4,7 +4,7 @@
 \alias{cacPlot}
 \title{Classification Accuracy and Consistency Plotting.}
 \usage{
-cacPlot(x, ablty = NULL, ablty.se = NULL, stat = "ca",
+cacPlot(x = NULL, ablty = NULL, ablty.se = NULL, stat = "ca",
   mdl = "Rasch", cutoff = 0, ci = TRUE, cSEM = FALSE,
   xRng = c(-3, 3), yRng = c(0, 1), grid = TRUE, lbls = TRUE,
   lgd = TRUE, rel.wdth = c(7, 1), colorblindFriendly = FALSE)
@@ -56,6 +56,13 @@ cacPlot(data, stat = "c", cutoff = .5, colorblindFriendly = TRUE)
 data <- expand.table(LSAT7[2:31, ])
 LSAT7.mod <- mirt(data, model = 1, itemtype = "Rasch")
 cacPlot(LSAT7.mod, stat = "a", cSEM = TRUE)
+
+# Plotting of classification consistency based on feeding cacPlot a
+# vector of raw ability estimates, and a vector with the standard
+# errors corresponding to those ability estimates.
+ability_estimates <- fscores(mirt(expand.table(LSAT7[2:31, ]), 1, "Rasch"),
+    "ML", response.pattern = expand.table(LSAT7[2:31, ]))[, c("F1", "SE_F1")]
+cacPlot(ablty = ability_estimates[, "F1"], ablty.se = ability_estimates[, "SE_F1"])
 }
 \references{
 R. Philip Chalmers (2012). mirt: A Multidimensional Item Response Theory Package for the R Environment. Journal of Statistical Software, 48(6), 1-29.
