@@ -53,7 +53,6 @@ cacPlot <- function(x = NULL, ablty = NULL, ablty.se = NULL, cutoff = 0, stat = 
     stat <- "Accuracy"
   }
   layout(matrix(c(2, 1), ncol = 2), c(rel.wdth[1], rel.wdth[2]), c(1, 1))
-
   par(mar = c(4, 1, 3, 3), las = 1, cex = 1)
   plot(NULL, xlim = c(0, 1), ylim = c(.5, 1), axes = FALSE, xlab = "", ylab = "")
   abline(h = seq(.5, 1, .0001), col = sapply(seq(.5, 1, .0001), cacGradient, cp = colorblindFriendly))
@@ -104,4 +103,5 @@ cacPlot <- function(x = NULL, ablty = NULL, ablty.se = NULL, cutoff = 0, stat = 
     par(cex = 1.5)
     title(xlab = expression(Theta))
   }
+  box()
 }
