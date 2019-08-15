@@ -39,7 +39,7 @@ cacPlot(x = NULL, ablty = NULL, ablty.se = NULL, cutoff = 0,
 
 \item{ablty.est}{A character value specifying which estimator to use for estimating ability from data. Default is maximum likelihood ("ML"). See \code{?mirt} for options.}
 
-\item{colorblindFriendly}{Make gradient colorblind friendly?}
+\item{colorblindFriendly}{Make gradient color-blind friendly?}
 }
 \value{
 A graph plotting observations with color gradients indicating expected classification consistency and accuracy relative to a defined cutoff point.
