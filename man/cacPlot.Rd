@@ -66,7 +66,7 @@ cacPlot(LSAT7.mod, stat = "a", cSEM = TRUE)
 # errors corresponding to those ability estimates.
 ability_estimates <- fscores(mirt(expand.table(LSAT7[2:31, ]), 1, "Rasch"),
     "ML", response.pattern = expand.table(LSAT7[2:31, ]))[, c("F1", "SE_F1")]
-cacPlot(ablty = ability_estimates[, "F1"], ablty.se = ability_estimates[, "SE_F1"])
+cacPlot(ablty = ability_estimates[, "F1"], ablty.se = ability_estimates[, "SE_F1"], stat = "c")
 }
 \references{
 R. Philip Chalmers (2012). mirt: A Multidimensional Item Response Theory Package for the R Environment. Journal of Statistical Software, 48(6), 1-29.

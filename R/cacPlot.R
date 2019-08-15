@@ -39,7 +39,7 @@
 #' # errors corresponding to those ability estimates.
 #' ability_estimates <- fscores(mirt(expand.table(LSAT7[2:31, ]), 1, "Rasch"),
 #'     "ML", response.pattern = expand.table(LSAT7[2:31, ]))[, c("F1", "SE_F1")]
-#' cacPlot(ablty = ability_estimates[, "F1"], ablty.se = ability_estimates[, "SE_F1"])
+#' cacPlot(ablty = ability_estimates[, "F1"], ablty.se = ability_estimates[, "SE_F1"], stat = "c")
 #' @export
 
 cacPlot <- function(x = NULL, ablty = NULL, ablty.se = NULL, cutoff = 0, stat = "ca", ci = TRUE, cSEM = FALSE, xRng = c(-3, 3), yRng = c(0, 1), grid = TRUE, lbls = TRUE, lgd = TRUE, rel.wdth = c(7, 1), mdl = "Rasch", ablty.est = "ML", colorblindFriendly = FALSE) {
