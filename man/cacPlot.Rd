@@ -46,6 +46,10 @@ A graph plotting observations with color gradients indicating expected classific
 }
 \description{
 Plotting tool for gauging the classification accuracy or consistency of classifications based on IRT ability estimates, where classification accuracy and consistency indices are computed by means of the \code{cacIRT} package (Lathrop, 2015).
+
+Classification accuracy (CA) refers to the rate of correct classification based on observed performances. Classification consistency (CC) refers to the rate at which examinees are placed in the same category across administrations of equivalent tests, regardless of whether the classification is accurate. Both of these values can range between 1 (perfect accuracy / consistency) and .5 (perfectly inaccurate / inconsistent; Lathrop and Cheng, 2014).
+
+The expected classification accuracy and consistency indices are those of the "Rudner approach" (Rudner, 2001, 2005). The expected classification accuracy index gives the probability of an examinee with a given actual-score attaining a specific observed score within some given interval (e.g., above or below some given cutoff score) on the actual-score scale.
 }
 \examples{
 # Color-blind friendly plotting of classification consistency based on feeding
@@ -72,4 +76,8 @@ cacPlot(ablty = ability_estimates[, "F1"], ablty.se = ability_estimates[, "SE_F1
 R. Philip Chalmers (2012). mirt: A Multidimensional Item Response Theory Package for the R Environment. Journal of Statistical Software, 48(6), 1-29.
 
 Quinn N. Lathrop (2015). cacIRT: Classification Accuracy and Consistency under Item Response Theory. R package version 1.4.
+
+Lawrence M. Rudner (2001). Computing the Expected PRoportions of Misclassified Examinees. Practical Assessment, Research & Evaluation., 7(14), 1-6.
+
+Lawrence M. Rudner (2005). Expected Classification Accuracy. Practical Assessment, Research & Evaluation, 10(13), 1-5.
 }
