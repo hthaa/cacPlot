@@ -75,12 +75,12 @@ cacPlot <- function(x = NULL, ablty = NULL, ablty.se = NULL, cutoff = 0, stat = 
     matrix(c(ablty, ablty.se), ncol = 2)
   }
   cac <- cacIRT::class.Rud(cutoff, ability = ab.est[, 1], se = ab.est[, 2], D = 1)
-  plot(NULL, xlim = c(xRng[1], xRng[2]), ylim = c(yRng[1], yRng[2]), xlab = "", ylab = "")
+  plot(NULL, xlim = xRng, ylim = yRng, xlab = "", ylab = "")
   if (grid) grid()
   if (cSEM) {
     par(new = TRUE)
     plot(seq(xRng[1], xRng[2], .001), 1 / sqrt(mirt::testinfo(mod, seq(xRng[1], xRng[2], .001))),
-         xlim = c(xRng[1], xRng[2]), ylim = c(yRng[1], yRng[2]), type = "l", lty = 2, lwd = 2, xlab = "", ylab = "")
+         xlim = xRng, ylim = yRng, type = "l", lty = 2, lwd = 2, xlab = "", ylab = "")
   }
   abline(v = cutoff, lty = 3, lwd = 2)
   curve(dnorm(x), from = xRng[1], to = xRng[2], lwd = 2, n = 1001, add = TRUE)

@@ -20,3 +20,7 @@ Missing values are treated by passing \code{na.rm = TRUE} to the \code{var} func
 
 Be aware that this function does not issue a warning if there are negative correlations between variables in the supplied data-set.
 }
+\examples{
+data <- expand.table(LSAT7)
+cba(data)
+}
