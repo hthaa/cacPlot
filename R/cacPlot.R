@@ -101,7 +101,7 @@ cacPlot <- function(x = NULL, ablty = NULL, ablty.se = NULL, pop.dist = c(0, 1),
   if (ci) {
     coords <- matrix(c(ab.est[, 1], ab.est[, 2], ab.est[, 1] - 1.96*ab.est[, 2], ab.est[, 1] + 1.96*ab.est[, 2], sapply(ab.est[, 1], dnorm, mean = pop.dist[1], sd = pop.dist[2])), ncol = 5)
     apply(coords, 1, function(x) {
-      if (length(cutoff > 1)) {
+      if (length(cutoff) > 1) {
         lines(x[c(3, 4)], rep(x[5], 2), col = cacGradient(min(cacIRT::class.Rud(cutoff, D = 1, ability = x[1], se = x[2])$Conditional[[stat]][, -(length(cutoff) + 1)]),
                                                           colorblindFriendly), lwd = 2)
         lines(rep(x[3], 2), c(x[5] - (yRng[2] - yRng[1]) * .015, x[5] + (yRng[2] - yRng[1]) * .015),
