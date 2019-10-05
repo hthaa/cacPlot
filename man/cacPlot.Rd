@@ -4,9 +4,9 @@
 \alias{cacPlot}
 \title{Classification Accuracy and Consistency Plotting.}
 \usage{
-cacPlot(x = NULL, ablty = NULL, ablty.se = NULL, cutoff = 0,
-  stat = "ca", ci = TRUE, cSEM = FALSE, xRng = c(-3, 3),
-  yRng = c(0, 0.5), grid = TRUE, lbls = TRUE, lgd = TRUE,
+cacPlot(x = NULL, ablty = NULL, ablty.se = NULL, pop.dist = c(0,
+  1), cutoff = 0, stat = "ca", ci = TRUE, cSEM = FALSE,
+  xRng = c(-3, 3), yRng = c(0, 0.5), grid = TRUE, lbls = TRUE,
   rel.wdth = c(7, 1), mdl = "Rasch", ablty.est = "ML",
   colorblindFriendly = FALSE)
 }
@@ -16,6 +16,8 @@ cacPlot(x = NULL, ablty = NULL, ablty.se = NULL, cutoff = 0,
 \item{ablty}{A vector of ability estimates. Requires specification of standard error in \code{ablty.se}.}
 
 \item{ablty.se}{A vector of standard errors of estimates corresponding to the values in the \code{ablty} vector. Must be supplied if raw ability estimates are to be used for plotting.}
+
+\item{pop.dist}{Population distribution. Specifies the mean and standard deviation of the population distribution along which individual Theta values are plotted.}
 
 \item{cutoff}{The cutoff value relative to which expected classification consistency or accuracy for observations are to be calculated and illustrated.}
 
@@ -71,13 +73,18 @@ cacPlot(LSAT7.mod, stat = "a", cSEM = TRUE)
 ability_estimates <- fscores(mirt(expand.table(LSAT7[2:31, ]), 1, "Rasch"),
     "ML", response.pattern = expand.table(LSAT7[2:31, ]))[, c("F1", "SE_F1")]
 cacPlot(ablty = ability_estimates[, "F1"], ablty.se = ability_estimates[, "SE_F1"], stat = "c")
+
+# Plotting of classification accuracy with several cutoff points
+data <- expand.table(LSAT7[2:31, ])
+LSAT7.mod <- mirt(data, model = 1, itemtype = "Rasch")
+cacPlot(LSAT7.mod, stat = "a", cutoff = c(-.5, 0, .5))
 }
 \references{
 R. Philip Chalmers (2012). mirt: A Multidimensional Item Response Theory Package for the R Environment. Journal of Statistical Software, 48(6), 1-29.
 
 Quinn N. Lathrop (2015). cacIRT: Classification Accuracy and Consistency under Item Response Theory. R package version 1.4.
 
-Lawrence M. Rudner (2001). Computing the Expected PRoportions of Misclassified Examinees. Practical Assessment, Research & Evaluation., 7(14), 1-6.
+Lawrence M. Rudner (2001). Computing the Expected Proportions of Misclassified Examinees. Practical Assessment, Research & Evaluation., 7(14), 1-6.
 
 Lawrence M. Rudner (2005). Expected Classification Accuracy. Practical Assessment, Research & Evaluation, 10(13), 1-5.
 }
