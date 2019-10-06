@@ -8,7 +8,7 @@
 #' @param ablty A vector of ability estimates. Requires specification of standard error in \code{ablty.se}.
 #' @param ablty.se A vector of standard errors of estimates corresponding to the values in the \code{ablty} vector. Must be supplied if raw ability estimates are to be used for plotting.
 #' @param pop.dist Population distribution. Specifies the mean and standard deviation of the population distribution along which individual Theta values are plotted.
-#' @param cutoff The cutoff value relative to which expected classification consistency or accuracy for observations are to be calculated and illustrated.
+#' @param cutoff A single value or a vector of values defining the cutoff(s) relative to which expected classification consistency or accuracy for observations are to be calculated and illustrated.
 #' @param stat A character-value indicating whether to color-code observations with respect to their expected consistency or accuracy. Permissible values are "c", "cc", "consistency" or "Consistency" for expected classification consistency, and "a", "ca", "accuracy" or "Accuracy" for expected classification accuracy.
 #' @param ci Plot confidence intervals around each observation point?
 #' @param cSEM Plot the conditional standard errors of the estimates?
@@ -34,7 +34,7 @@
 #' # Plotting of classification accuracy based on feeding cacPlot a mirt
 #' # model-object along with plotting of the conditional standard error
 #' # of measurement (cSEM), using the default cutoff of 0 (i.e., above
-#' # or below average.
+#' # or below average).
 #' data <- expand.table(LSAT7[2:31, ])
 #' LSAT7.mod <- mirt(data, model = 1, itemtype = "Rasch")
 #' cacPlot(LSAT7.mod, stat = "a", cSEM = TRUE)

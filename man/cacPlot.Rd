@@ -19,7 +19,7 @@ cacPlot(x = NULL, ablty = NULL, ablty.se = NULL, pop.dist = c(0,
 
 \item{pop.dist}{Population distribution. Specifies the mean and standard deviation of the population distribution along which individual Theta values are plotted.}
 
-\item{cutoff}{The cutoff value relative to which expected classification consistency or accuracy for observations are to be calculated and illustrated.}
+\item{cutoff}{A single value or a vector of values defining the cutoff(s) relative to which expected classification consistency or accuracy for observations are to be calculated and illustrated.}
 
 \item{stat}{A character-value indicating whether to color-code observations with respect to their expected consistency or accuracy. Permissible values are "c", "cc", "consistency" or "Consistency" for expected classification consistency, and "a", "ca", "accuracy" or "Accuracy" for expected classification accuracy.}
 
@@ -62,7 +62,7 @@ cacPlot(data, stat = "c", cutoff = .5, colorblindFriendly = TRUE)
 # Plotting of classification accuracy based on feeding cacPlot a mirt
 # model-object along with plotting of the conditional standard error
 # of measurement (cSEM), using the default cutoff of 0 (i.e., above
-# or below average.
+# or below average).
 data <- expand.table(LSAT7[2:31, ])
 LSAT7.mod <- mirt(data, model = 1, itemtype = "Rasch")
 cacPlot(LSAT7.mod, stat = "a", cSEM = TRUE)
