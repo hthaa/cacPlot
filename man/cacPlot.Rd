@@ -17,31 +17,31 @@ cacPlot(x = NULL, ablty = NULL, ablty.se = NULL, pop.dist = c(0,
 
 \item{ablty.se}{A vector of standard errors of estimates corresponding to the values in the \code{ablty} vector. Must be supplied if raw ability estimates are to be used for plotting.}
 
-\item{pop.dist}{Population distribution. Specifies the mean and standard deviation of the population distribution along which individual Theta values are plotted.}
+\item{pop.dist}{Population distribution. Specifies the mean and standard deviation of the population distribution along which individual Theta values are plotted. Default is c(0, 1), reflecting the Standard Normal distribution.}
 
-\item{cutoff}{A single value or a vector of values defining the cutoff(s) relative to which expected classification consistency or accuracy for observations are to be calculated and illustrated.}
+\item{cutoff}{A single value or a vector of values defining the cutoff(s) relative to which expected classification consistency or accuracy for observations are to be calculated and illustrated. Default is 0.}
 
-\item{stat}{A character-value indicating whether to color-code observations with respect to their expected consistency or accuracy. Permissible values are "c", "cc", "consistency" or "Consistency" for expected classification consistency, and "a", "ca", "accuracy" or "Accuracy" for expected classification accuracy.}
+\item{stat}{A character-value indicating whether to color-code observations with respect to their expected consistency or accuracy. Permissible values are "c", "cc", "consistency" or "Consistency" for expected classification consistency, and "a", "ca", "accuracy" or "Accuracy" for expected classification accuracy. Default is "ca".}
 
-\item{ci}{Plot confidence intervals around each observation point?}
+\item{ci}{Logical. Plot confidence intervals around each observation point? Default is TRUE.}
 
-\item{cSEM}{Plot the conditional standard errors of the estimates?}
+\item{cSEM}{Logical. Plot the conditional standard errors of the estimates? Default is FALSE.}
 
-\item{xRng}{The range of the plotted x-axis.}
+\item{xRng}{The range of the plotted x-axis. Default is c(-3, 3).}
 
-\item{yRng}{The range of the plotted y-axis.}
+\item{yRng}{The range of the plotted y-axis. Default is c(0, .5).}
 
-\item{grid}{Include a grid in the plot?}
+\item{grid}{Logical. Include a grid in the plot? Default is TRUE.}
 
-\item{lbls}{Include labels in the plot?}
+\item{lbls}{Logical. Include labels in the plot? Default is TRUE.}
 
-\item{rel.wdth}{The relative widths of the main plot and the color gradient legend.}
+\item{rel.wdth}{The relative widths of the main plot and the color gradient legend. Default is c(7, 1).}
 
-\item{mdl}{If a dataset was supplied as input, specifies which model to fit to the data by way of the \code{mirt} package (Chalmers, 2012). See \code{?mirt} for options.}
+\item{mdl}{If a dataset was supplied as input, specifies which model to fit to the data by way of the \code{mirt} package (Chalmers, 2012). See \code{?mirt} for options. Default is "Rasch".}
 
-\item{ablty.est}{A character value specifying which estimator to use for estimating ability from data. Default is maximum likelihood ("ML"). See \code{?mirt} for options.}
+\item{ablty.est}{A character value specifying which estimator to use for estimating ability from data. Default is maximum likelihood ("ML"). See \code{?mirt} for options. Default is "ML".}
 
-\item{colorblindFriendly}{Make gradient color-blind friendly?}
+\item{colorblindFriendly}{Logical. Make gradient color-blind friendly? Default is FALSE.}
 }
 \value{
 A graph plotting observations with color gradients indicating expected classification consistency and accuracy relative to a defined cutoff point.
