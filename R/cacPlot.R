@@ -7,19 +7,19 @@
 #' @param x A data.frame or matrix with rows representing respondents and columns representing items, or a mirt-model object of class "SingleGroupClass".
 #' @param ablty A vector of ability estimates. Requires specification of standard error in \code{ablty.se}.
 #' @param ablty.se A vector of standard errors of estimates corresponding to the values in the \code{ablty} vector. Must be supplied if raw ability estimates are to be used for plotting.
-#' @param pop.dist Population distribution. Specifies the mean and standard deviation of the population distribution along which individual Theta values are plotted.
-#' @param cutoff A single value or a vector of values defining the cutoff(s) relative to which expected classification consistency or accuracy for observations are to be calculated and illustrated.
-#' @param stat A character-value indicating whether to color-code observations with respect to their expected consistency or accuracy. Permissible values are "c", "cc", "consistency" or "Consistency" for expected classification consistency, and "a", "ca", "accuracy" or "Accuracy" for expected classification accuracy.
-#' @param ci Plot confidence intervals around each observation point?
-#' @param cSEM Plot the conditional standard errors of the estimates?
-#' @param xRng The range of the plotted x-axis.
-#' @param yRng The range of the plotted y-axis.
-#' @param grid Include a grid in the plot?
-#' @param lbls Include labels in the plot?
-#' @param rel.wdth The relative widths of the main plot and the color gradient legend.
-#' @param mdl If a dataset was supplied as input, specifies which model to fit to the data by way of the \code{mirt} package (Chalmers, 2012). See \code{?mirt} for options.
-#' @param ablty.est A character value specifying which estimator to use for estimating ability from data. Default is maximum likelihood ("ML"). See \code{?mirt} for options.
-#' @param colorblindFriendly Make gradient color-blind friendly?
+#' @param pop.dist Population distribution. Specifies the mean and standard deviation of the population distribution along which individual Theta values are plotted. Default is c(0, 1), reflecting the Standard Normal distribution.
+#' @param cutoff A single value or a vector of values defining the cutoff(s) relative to which expected classification consistency or accuracy for observations are to be calculated and illustrated. Default is 0.
+#' @param stat A character-value indicating whether to color-code observations with respect to their expected consistency or accuracy. Permissible values are "c", "cc", "consistency" or "Consistency" for expected classification consistency, and "a", "ca", "accuracy" or "Accuracy" for expected classification accuracy. Default is "ca".
+#' @param ci Logical. Plot confidence intervals around each observation point? Default is TRUE.
+#' @param cSEM Logical. Plot the conditional standard errors of the estimates? Default is FALSE.
+#' @param xRng The range of the plotted x-axis. Default is c(-3, 3).
+#' @param yRng The range of the plotted y-axis. Default is c(0, .5).
+#' @param grid Logical. Include a grid in the plot? Default is TRUE.
+#' @param lbls Logical. Include labels in the plot? Default is TRUE.
+#' @param rel.wdth The relative widths of the main plot and the color gradient legend. Default is c(7, 1).
+#' @param mdl If a dataset was supplied as input, specifies which model to fit to the data by way of the \code{mirt} package (Chalmers, 2012). See \code{?mirt} for options. Default is "Rasch".
+#' @param ablty.est A character value specifying which estimator to use for estimating ability from data. Default is maximum likelihood ("ML"). See \code{?mirt} for options. Default is "ML".
+#' @param colorblindFriendly Logical. Make gradient color-blind friendly? Default is FALSE.
 #' @return A graph plotting observations with color gradients indicating expected classification consistency and accuracy relative to a defined cutoff point.
 #' @references R. Philip Chalmers (2012). mirt: A Multidimensional Item Response Theory Package for the R Environment. Journal of Statistical Software, 48(6), 1-29.
 #' @references Quinn N. Lathrop (2015). cacIRT: Classification Accuracy and Consistency under Item Response Theory. R package version 1.4.
