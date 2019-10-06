@@ -93,7 +93,9 @@ cacPlot <- function(x = NULL, ablty = NULL, ablty.se = NULL, pop.dist = c(0, 1),
   }
   sapply(cutoff, function(x) abline(v = x, lty = 3, lwd = 2))
   curve(dnorm(x, pop.dist[1], pop.dist[2]), from = xRng[1], to = xRng[2], lwd = 2, n = 1001, add = TRUE)
-  cac.col <- apply(cac, 1, function(x) { cacGradient(if (length(cutoff) > 1) { min(x) } else { x }, cp = colorblindFriendly) })
+
+  cac.col <- apply(cac, 1, function(x) { cacGradient(min(x), cp = colorblindFriendly) })
+
   points(matrix(c(ab.est[, 1], sapply(ab.est[, 1], dnorm, mean = pop.dist[1], pop.dist[2])), ncol = 2), pch = 19, col = cac.col)
   if (ci) {
     coords <- matrix(c(ab.est[, 1], ab.est[, 2], ab.est[, 1] - 1.96*ab.est[, 2], ab.est[, 1] + 1.96*ab.est[, 2], sapply(ab.est[, 1], dnorm, mean = pop.dist[1], sd = pop.dist[2])), ncol = 5)
