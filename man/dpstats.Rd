@@ -9,6 +9,9 @@ dpstats(cmat = NULL)
 \arguments{
 \item{cmat}{A confusion matrix of true and false positives and negatives, organized as \code{matrix(c(tp, fp, tn, fn), nrow = 2)}.}
 }
+\value{
+A list of diagnostic performance statistics, namely the Sensitivity, Specificity, Positive and Negative Likelihood Ratios (LR+ and LR-), Positive and Negative Predictive values (PPV and NPV), and the Youden's J statistic.
+}
 \description{
 Given a confusion matrix of the sort \code{matrix(c(tp, fp, tn, fn), nrow = 2)}, calculate common diagnostic performance statistics.
 }
