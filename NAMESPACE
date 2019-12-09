@@ -3,4 +3,5 @@
 export(RMSEA)
 export(cacPlot)
 export(cba)
+export(cmat)
 export(moments)
