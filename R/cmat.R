@@ -31,7 +31,7 @@ dpstats <- function(cmat = NULL) {
     dp[["LR.Positive"]] <- dp[["Sensitivity"]] / (1 - dp[["Specificity"]])
     dp[["LR.Negative"]] <- (1 - dp[["Sensitivity"]]) / dp[["Specificity"]]
     dp[["PV.Positive"]] <- cmat[1, 1] / (cmat[1, 1] + cmat[2, 1])
-    dp[["PV.Negative"]] <- cmat[2, 1] / (cmat[1, 2] + cmat[2, 2])
+    dp[["PV.Negative"]] <- cmat[1, 2] / (cmat[1, 2] + cmat[2, 2])
     dp[["Youdens.J"]] <- dp[["Sensitivity"]] + dp[["Specificity"]] -1
     return(dp)
 }
