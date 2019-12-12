@@ -115,4 +115,5 @@ cacPlot <- function(x = NULL, ablty = NULL, ablty.se = NULL, pop.dist = c(0, 1),
     title(xlab = expression(Theta))
   }
   box()
+  par(mfrow = c(1, 1))
 }
